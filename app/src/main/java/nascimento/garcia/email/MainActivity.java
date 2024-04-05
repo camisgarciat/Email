@@ -36,18 +36,21 @@ public class MainActivity extends AppCompatActivity {
                 //obtem o campo EditText de id etTexto através do metodo findViewById
                 EditText etTexto= findViewById(R.id.etTexto);
                 String texto = etTexto.getText().toString();
-               //cria o intent
+               //cria o intent (intencao)
                 Intent i = new Intent(Intent.ACTION_SENDTO);
                 i.setData(Uri.parse("mailto:"));
-              //preenchem o Intent com os dados que queremos enviar para a app externa que vai enviar o e-mail
+              //preenche o Intent com os dados que queremos enviar para a app externa que vai enviar o e-mail
                 String [] emails = new String[] {email};
                 i.putExtra(Intent.EXTRA_EMAIL,emails);
                 i.putExtra(Intent.EXTRA_SUBJECT,assunto);
                 i.putExtra(Intent.EXTRA_TEXT,texto);
 
+                //tenta executar/iniciar o Intent
+
                 try{
                     startActivity(Intent.createChooser(i,"Escolha o APP"));
                 }
+                //exibe erro caso não exista app
                 catch (ActivityNotFoundException e){
                     Toast.makeText(MainActivity.this,"Não há nenhum app que possa realizar essa operação",Toast.LENGTH_LONG).show();
 
